@@ -1,0 +1,30 @@
+HotelPage - fixed version
+
+Main fixes:
+1. Initial payment/deposit choices: 10%, 20%, 100% on booking confirmation.
+2. New bookings redirect directly to payment while preserving the selected percentage.
+3. Partial payment supported: 10%/20% first payment confirms the booking; remaining balance can be paid later.
+4. 100% first payment is recognized as fully paid.
+5. Booking History displays Unpaid / Partially Paid / Fully Paid, paid amount, remaining amount, and Pay Remaining.
+6. PaymentDAO now calculates total successful payments instead of treating any paid row as fully paid.
+7. Promotion/discount is applied only on the first payment and Booking.TotalPrice is updated to the discounted total so balances remain consistent.
+8. JSP JSTL URIs normalized to Jakarta JSTL; static header taglib duplication removed.
+9. UTF-8 JSP directives normalized; missing JSTL declarations fixed.
+10. web.xml updated to Jakarta Servlet 6.0 namespace for Jakarta EE 10 / Tomcat 10.1.
+11. Removed legacy javax javaee-web-api dependency from pom.xml.
+12. Added serialVersionUID to servlets to clear Java serial warnings.
+13. Replaced null JUL logger messages that can trigger Tomcat JULI logging issues.
+
+Verification performed:
+- All Java source compiled successfully with javac --release 11 and -Xlint:all using project dependencies: 0 warnings / 0 errors.
+- 0 legacy java.sun.com JSTL core URIs.
+- 0 duplicate JSP contentType directives.
+- 0 JSP pages using <c:...> without a Jakarta JSTL declaration available.
+- 0 pages that statically include header.jsp and redundantly redefine the c prefix.
+
+No database schema change is required for the 10% / 20% / 100% payment feature in this version.
+
+Recommended after opening in NetBeans:
+- Clean and Build the project.
+- Stop Tomcat before redeploying.
+- Delete any old deployed /hotel application and Tomcat work/Catalina/localhost/hotel cache if an old JSP is still being shown.
